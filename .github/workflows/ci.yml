@@ -60,5 +60,7 @@ jobs:
           if npm view "${NAME}@${VERSION}" version --registry=https://registry.npmjs.org >/dev/null 2>&1; then
             echo "${NAME}@${VERSION} is already published on npm; skipping"
           else
+            npm run typecheck
+            npm run build
             npm publish --ignore-scripts
           fi
