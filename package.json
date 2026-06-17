@@ -1,6 +1,6 @@
 {
-  "name": "@scan-kenteken/char-flow",
-  "version": "0.1.1",
+  "name": "char-flow",
+  "version": "0.1.2",
   "description": "CharFlow — lightweight animated alphanumeric text for license plates, codes, and flowing paragraphs",
   "type": "module",
   "license": "MIT",
@@ -50,9 +50,6 @@
     "LICENSE"
   ],
   "sideEffects": true,
-  "publishConfig": {
-    "access": "public"
-  },
   "scripts": {
     "clean": "node -e \"import('node:fs').then(fs => fs.rmSync('dist', { recursive: true, force: true }))\"",
     "build": "tsup",

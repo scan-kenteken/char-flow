@@ -63,4 +63,7 @@ jobs:
             npm run typecheck
             npm run build
             npm publish --ignore-scripts
+            if npm view @scan-kenteken/char-flow version --registry=https://registry.npmjs.org >/dev/null 2>&1; then
+              npm deprecate @scan-kenteken/char-flow "Renamed to char-flow. Use: npm install char-flow" || true
+            fi
           fi

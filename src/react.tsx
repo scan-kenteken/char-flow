@@ -8,7 +8,7 @@ export type { Preset, EffectTiming } from './types'
 function assertRegistered(): void {
   if (typeof customElements !== 'undefined' && !customElements.get('char-flow')) {
     throw new Error(
-      'CharFlow: import "@scan-kenteken/char-flow/element" before using the React wrapper.',
+      'CharFlow: import "char-flow/element" before using the React wrapper.',
     )
   }
 }
