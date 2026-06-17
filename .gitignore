@@ -3,7 +3,5 @@ dist/
 demo/element.js
 assets/.frames/
 *.tsbuildinfo
+*.tgz
 .DS_Store
-*.log
-.env
-.env.*
