@@ -4,10 +4,14 @@ Lightweight animated alphanumeric text for license plates, codes, and flowing pa
 
 Digits and letters roll through their alphabet on change; inserts and deletes slide in and out. Built as a web component with an optional React wrapper.
 
+<p align="center">
+  <img src="./assets/demo.gif" alt="CharFlow demo: animated text and license plate" width="720" />
+</p>
+
 ## Install
 
 ```sh
-npm install @scankenteken/char-flow
+npm install @scan-kenteken/char-flow
 ```
 
 ## Web component
@@ -16,7 +20,7 @@ Import the element entry to register `<char-flow>`:
 
 ```html
 <script type="module">
-  import '@scankenteken/char-flow/element'
+  import '@scan-kenteken/char-flow/element'
 </script>
 
 <char-flow value="G-123-BB" preset="plate"></char-flow>
@@ -25,7 +29,7 @@ Import the element entry to register `<char-flow>`:
 Or use the main entry (registers the element and re-exports helpers):
 
 ```ts
-import '@scankenteken/char-flow'
+import '@scan-kenteken/char-flow'
 ```
 
 ### Attributes
@@ -67,8 +71,8 @@ el.slideTiming = { duration: 340 }
 Register the element first, then use the wrapper:
 
 ```tsx
-import '@scankenteken/char-flow/element'
-import { CharFlow } from '@scankenteken/char-flow/react'
+import '@scan-kenteken/char-flow/element'
+import { CharFlow } from '@scan-kenteken/char-flow/react'
 
 export function Plate({ value }: { value: string }) {
   return <CharFlow value={value} preset="plate" className="plate" />
@@ -82,7 +86,7 @@ React is an optional peer dependency (`>=18`).
 The main entry also exports diffing and classification utilities:
 
 ```ts
-import { diff, classify } from '@scankenteken/char-flow'
+import { diff, classify } from '@scan-kenteken/char-flow'
 
 diff('ABC-100', 'ABC-9')
 classify('G')

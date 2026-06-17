@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CharFlow record</title>
+    <style>
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        width: 720px;
+        height: 320px;
+        font-family: system-ui, sans-serif;
+        background: #0f1115;
+        color: #e8eaed;
+        padding: 2rem 2.5rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 2.5rem;
+      }
+      .row { display: flex; flex-direction: column; gap: 0.35rem; }
+      .label {
+        font-size: 0.75rem;
+        font-weight: 500;
+        color: #9aa0a6;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+      .text-demo {
+        font-size: 1.5rem;
+        line-height: 1.4;
+      }
+      .plate {
+        font-size: 2.25rem;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+      }
+    </style>
+    <script type="module">
+      import './element.js'
+    </script>
+  </head>
+  <body>
+    <div class="row">
+      <span class="label">Text</span>
+      <char-flow id="text" class="text-demo" value="Hello world"></char-flow>
+    </div>
+    <div class="row">
+      <span class="label">License plate</span>
+      <char-flow id="plate" class="plate" preset="plate" value="G-123-BB"></char-flow>
+    </div>
+  </body>
+</html>

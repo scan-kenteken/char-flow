@@ -1,5 +1,5 @@
 {
-  "name": "@scankenteken/char-flow",
+  "name": "@scan-kenteken/char-flow",
   "version": "0.1.0",
   "description": "CharFlow — lightweight animated alphanumeric text for license plates, codes, and flowing paragraphs",
   "type": "module",
@@ -59,7 +59,8 @@
     "demo": "npm run build && cp dist/element.js demo/element.js && npx --yes serve . -p 3000",
     "dev": "tsup --watch",
     "typecheck": "tsc --noEmit",
-    "prepack": "npm run typecheck && npm run build"
+    "prepack": "npm run typecheck && npm run build",
+    "capture-demo": "node scripts/capture-demo.mjs"
   },
   "peerDependencies": {
     "react": ">=18"
@@ -71,6 +72,7 @@
   },
   "devDependencies": {
     "@types/react": "^19.1.8",
+    "puppeteer-core": "^25.1.0",
     "react": "^19.1.0",
     "tsup": "^8.5.0",
     "typescript": "^5.8.3"

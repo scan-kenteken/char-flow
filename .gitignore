@@ -1,6 +1,7 @@
 node_modules/
 dist/
 demo/element.js
+assets/.frames/
 *.tsbuildinfo
 .DS_Store
 *.log
