@@ -1,0 +1,78 @@
+{
+  "name": "@scankenteken/char-flow",
+  "version": "0.1.0",
+  "description": "CharFlow — lightweight animated alphanumeric text for license plates, codes, and flowing paragraphs",
+  "type": "module",
+  "license": "MIT",
+  "author": "scankenteken",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/scan-kenteken/char-flow.git"
+  },
+  "bugs": {
+    "url": "https://github.com/scan-kenteken/char-flow/issues"
+  },
+  "homepage": "https://github.com/scan-kenteken/char-flow#readme",
+  "keywords": [
+    "animation",
+    "text",
+    "license-plate",
+    "kenteken",
+    "web-component",
+    "custom-element",
+    "react",
+    "alphanumeric",
+    "diff"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./element": {
+      "types": "./dist/element.d.ts",
+      "import": "./dist/element.js"
+    },
+    "./react": {
+      "types": "./dist/react.d.ts",
+      "import": "./dist/react.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "sideEffects": true,
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "clean": "node -e \"import('node:fs').then(fs => fs.rmSync('dist', { recursive: true, force: true }))\"",
+    "build": "tsup",
+    "demo": "npm run build && cp dist/element.js demo/element.js && npx --yes serve . -p 3000",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit",
+    "prepack": "npm run typecheck && npm run build"
+  },
+  "peerDependencies": {
+    "react": ">=18"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@types/react": "^19.1.8",
+    "react": "^19.1.0",
+    "tsup": "^8.5.0",
+    "typescript": "^5.8.3"
+  }
+}

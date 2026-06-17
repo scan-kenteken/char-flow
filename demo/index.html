@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CharFlow demo</title>
+    <style>
+      body {
+        font-family: system-ui, sans-serif;
+        padding: 2rem;
+        background: #0f1115;
+        color: #e8eaed;
+      }
+      h1 { font-size: 1rem; font-weight: 500; color: #9aa0a6; margin: 0 0 0.5rem; }
+      .plate {
+        font-size: 2.5rem;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+      }
+      .row { margin-bottom: 2rem; }
+      button {
+        margin-top: 0.75rem;
+        background: #1a73e8;
+        color: #fff;
+        border: 0;
+        padding: 0.5rem 1rem;
+        border-radius: 6px;
+        cursor: pointer;
+      }
+      .text-demo { font-size: 1.125rem; max-width: 36ch; line-height: 1.5; }
+    </style>
+    <script type="module">
+      import './element.js?v=8'
+    </script>
+  </head>
+  <body>
+    <div class="row">
+      <h1>License plate (preset=plate)</h1>
+      <char-flow id="plate" class="plate" preset="plate" value="G-123-BB"></char-flow>
+      <br />
+      <button id="plate-btn">Next scan</button>
+    </div>
+    <div class="row">
+      <h1>Code — changing length (insert / delete)</h1>
+      <char-flow id="code" class="plate" value="ABC-100"></char-flow>
+      <br />
+      <button id="code-btn">Next code</button>
+    </div>
+    <script type="module">
+      const plates = ['G-123-BB', 'G-456-BB', 'AB-12-CD', 'X-999-ZZ', 'G-123-B']
+      let pi = 0
+      document.getElementById('plate-btn').onclick = () => {
+        pi = (pi + 1) % plates.length
+        document.getElementById('plate').setAttribute('value', plates[pi])
+      }
+
+      const codes = ['ABC-100', 'ABC-9', 'ABCD-2048', 'XY-77', 'ABCDE-12345']
+      let ci = 0
+      document.getElementById('code-btn').onclick = () => {
+        ci = (ci + 1) % codes.length
+        document.getElementById('code').setAttribute('value', codes[ci])
+      }
+    </script>
+  </body>
+</html>

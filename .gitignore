@@ -1,0 +1,8 @@
+node_modules/
+dist/
+demo/element.js
+*.tsbuildinfo
+.DS_Store
+*.log
+.env
+.env.*
