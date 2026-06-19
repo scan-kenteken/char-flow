@@ -56,7 +56,6 @@
     "demo": "npm run build && cp dist/element.js demo/element.js && npx --yes serve . -p 3000",
     "dev": "tsup --watch",
     "typecheck": "tsc --noEmit",
-    "prepack": "npm run typecheck && npm run build",
     "capture-demo": "node scripts/capture-demo.mjs"
   },
   "peerDependencies": {

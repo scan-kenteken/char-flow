@@ -5,3 +5,4 @@ assets/.frames/
 *.tsbuildinfo
 *.tgz
 .DS_Store
+AGENTS.local.md
