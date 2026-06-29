@@ -1,6 +1,6 @@
 import { spinDirection, wheelIndex } from '../classify'
 import { DIGITS, LETTERS } from '../types'
-import type { RenderSegment } from '../types'
+import type { FlowDirection, RenderSegment } from '../types'
 import { displayLetter, formatChar } from './format'
 
 /**
@@ -23,11 +23,16 @@ function charForIndex(i: number, kind: 'digit' | 'letter', target: string): stri
 }
 
 /** Glyphs along the shortest path from `from` to `to` around the alphabet. */
-function wheelPlan(from: string, to: string, kind: 'digit' | 'letter'): StackPlan {
+function wheelPlan(
+  from: string,
+  to: string,
+  kind: 'digit' | 'letter',
+  direction: FlowDirection,
+): StackPlan {
   const n = kind === 'letter' ? LETTERS.length : DIGITS.length
   const a = wheelIndex(from, kind)
   const b = wheelIndex(to, kind)
-  const dir = spinDirection(from, to, kind)
+  const dir = spinDirection(from, to, kind, direction)
 
   const path: string[] = []
   for (let i = a; ; i = (i + dir + n) % n) {
@@ -47,10 +52,13 @@ function slidePlan(from: string, to: string): StackPlan {
 }
 
 /** Build the plan for a segment, or null if there is nothing to animate. */
-export function planFor(seg: RenderSegment): StackPlan | null {
+export function planFor(
+  seg: RenderSegment,
+  direction: FlowDirection = 'auto',
+): StackPlan | null {
   if (seg.fromChar == null || seg.fromChar === seg.char) return null
-  if (seg.anim === 'wheel-digit') return wheelPlan(seg.fromChar, seg.char, 'digit')
-  if (seg.anim === 'wheel-letter') return wheelPlan(seg.fromChar, seg.char, 'letter')
+  if (seg.anim === 'wheel-digit') return wheelPlan(seg.fromChar, seg.char, 'digit', direction)
+  if (seg.anim === 'wheel-letter') return wheelPlan(seg.fromChar, seg.char, 'letter', direction)
   return slidePlan(seg.fromChar, seg.char)
 }
 

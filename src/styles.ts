@@ -1,4 +1,4 @@
-import type { EffectTiming, Preset } from './types'
+import type { EffectTiming, FlowDirection, Preset } from './types'
 import { DEFAULT_SLIDE, DEFAULT_SPIN } from './types'
 
 export const STYLES = `
@@ -110,4 +110,9 @@ export function applyTimings(
 
 export function parsePreset(v: string | null): Preset {
   return v === 'plate' ? 'plate' : 'alnum'
+}
+
+export function parseDirection(v: string | null): FlowDirection {
+  if (v === 'forward' || v === 'backward') return v
+  return 'auto'
 }

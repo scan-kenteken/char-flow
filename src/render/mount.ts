@@ -1,4 +1,4 @@
-import type { RenderSegment } from '../types'
+import type { FlowDirection, RenderSegment } from '../types'
 import { existingCellMap, reuseCell, type AnimContext, type Pending } from './cell'
 
 function ms(value: string): number {
@@ -37,6 +37,7 @@ export function mountVisual(
   visual: HTMLElement,
   segments: RenderSegment[],
   animated: boolean,
+  direction: FlowDirection = 'auto',
 ): void {
   const existing = existingCellMap(visual)
 
@@ -48,7 +49,7 @@ export function mountVisual(
   const survivors = new Set<string>()
 
   for (const seg of segments) {
-    const node = reuseCell(seg, animated, existing, pending)
+    const node = reuseCell(seg, animated, existing, pending, direction)
     survivors.add(seg.key)
     nodes.push(node)
   }

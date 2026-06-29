@@ -1,13 +1,13 @@
 import { observeMetrics, syncMetrics } from './layout/metrics'
 import { mountVisual } from './render/mount'
 import { buildSegments, initialSegments } from './segments'
-import { applyPresetStyle, applyTimings, parsePreset, STYLES } from './styles'
-import type { EffectTiming, Preset } from './types'
+import { applyPresetStyle, applyTimings, parseDirection, parsePreset, STYLES } from './styles'
+import type { EffectTiming, FlowDirection, Preset } from './types'
 
 const TAG = 'char-flow'
 
 export class CharFlowElement extends HTMLElement {
-  static observedAttributes = ['value', 'preset', 'animated'] as const
+  static observedAttributes = ['value', 'preset', 'animated', 'direction'] as const
 
   #sr!: HTMLElement
   #visual!: HTMLElement
@@ -90,6 +90,14 @@ export class CharFlowElement extends HTMLElement {
     else this.setAttribute('animated', 'false')
   }
 
+  get direction(): FlowDirection {
+    return parseDirection(this.getAttribute('direction'))
+  }
+
+  set direction(v: FlowDirection) {
+    this.setAttribute('direction', v)
+  }
+
   set spinTiming(t: EffectTiming | undefined) {
     this.#spinTiming = t
     this.#applyOptions()
@@ -136,7 +144,7 @@ export class CharFlowElement extends HTMLElement {
       this.#keys = built.keys
     }
 
-    mountVisual(this.#visual, segments, animated)
+    mountVisual(this.#visual, segments, animated, this.direction)
     this.#prevValue = next
   }
 }

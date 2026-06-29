@@ -2,6 +2,8 @@ export type CharKind = 'digit' | 'letter' | 'other'
 
 export type Preset = 'plate' | 'alnum'
 
+export type FlowDirection = 'auto' | 'forward' | 'backward'
+
 /** How a changed character moves: roll through an alphabet, or a direct swap. */
 export type AnimKind = 'wheel-digit' | 'wheel-letter' | 'slide' | 'static'
 
@@ -14,6 +16,7 @@ export interface EffectTiming {
 export interface CharFlowOptions {
   preset?: Preset
   animated?: boolean
+  direction?: FlowDirection
   spinTiming?: EffectTiming
   slideTiming?: EffectTiming
 }

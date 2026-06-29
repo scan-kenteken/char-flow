@@ -1,6 +1,6 @@
 {
   "name": "char-flow",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "CharFlow — lightweight animated alphanumeric text for license plates, codes, and flowing paragraphs",
   "type": "module",
   "license": "MIT",

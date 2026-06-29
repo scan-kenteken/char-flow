@@ -39,6 +39,7 @@ import 'char-flow'
 | `value` | `""` | Text to display |
 | `preset` | `alnum` | `plate` (uppercase, tabular) or `alnum` |
 | `animated` | `true` | Set to `false` to disable motion |
+| `direction` | `auto` | `auto` chooses the shortest wheel path, `forward` counts up, `backward` counts down |
 
 Animations respect `prefers-reduced-motion`.
 

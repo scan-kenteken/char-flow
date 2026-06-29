@@ -1,4 +1,4 @@
-import type { AnimKind, CharKind } from './types'
+import type { AnimKind, CharKind, FlowDirection } from './types'
 
 export function classify(char: string): CharKind {
   if (!char) return 'other'
@@ -35,10 +35,17 @@ export function animForReplace(from: string, to: string): AnimKind {
   return 'slide'
 }
 
-export function spinDirection(from: string, to: string, kind: CharKind): 1 | -1 {
+export function spinDirection(
+  from: string,
+  to: string,
+  kind: CharKind,
+  direction: FlowDirection = 'auto',
+): 1 | -1 {
   const a = wheelIndex(from, kind)
   const b = wheelIndex(to, kind)
   if (a === b) return 1
+  if (direction === 'forward') return 1
+  if (direction === 'backward') return -1
   const n = kind === 'letter' ? 26 : 10
   const up = (b - a + n) % n
   const down = (a - b + n) % n

@@ -1,4 +1,4 @@
-import type { RenderSegment } from '../types'
+import type { FlowDirection, RenderSegment } from '../types'
 import { STAGGER_STEP_MS } from '../types'
 import { formatChar } from './format'
 import { isWheel, planFor } from './stack'
@@ -53,8 +53,12 @@ function enteringCell(seg: RenderSegment, pending: Pending[]): HTMLElement {
   return cell
 }
 
-function rollingCell(seg: RenderSegment, pending: Pending[]): HTMLElement {
-  const plan = planFor(seg)!
+function rollingCell(
+  seg: RenderSegment,
+  pending: Pending[],
+  direction: FlowDirection,
+): HTMLElement {
+  const plan = planFor(seg, direction)!
   const wheel = isWheel(seg)
   const cell = makeCell(seg, wheel ? 'cf-cell--rolling' : '')
 
@@ -93,12 +97,13 @@ export function buildCell(
   seg: RenderSegment,
   animated: boolean,
   pending: Pending[],
+  direction: FlowDirection,
 ): HTMLElement {
   if (seg.entering) {
     return animated ? enteringCell(seg, pending) : staticCell(seg)
   }
-  if (animated && planFor(seg)) {
-    return rollingCell(seg, pending)
+  if (animated && planFor(seg, direction)) {
+    return rollingCell(seg, pending, direction)
   }
   return staticCell(seg)
 }
@@ -108,13 +113,14 @@ export function reuseCell(
   animated: boolean,
   existing: Map<string, HTMLElement>,
   pending: Pending[],
+  direction: FlowDirection,
 ): HTMLElement {
   const cell = existing.get(seg.key)
   // Unchanged, resting cells are reused untouched; anything that moves is rebuilt.
   if (cell && !seg.entering && seg.fromChar == null && cell.dataset.char === seg.char) {
     return cell
   }
-  return buildCell(seg, animated, pending)
+  return buildCell(seg, animated, pending, direction)
 }
 
 export function existingCellMap(root: HTMLElement): Map<string, HTMLElement> {
