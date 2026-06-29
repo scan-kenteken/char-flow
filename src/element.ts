@@ -1,13 +1,13 @@
 import { observeMetrics, syncMetrics } from './layout/metrics'
 import { mountVisual } from './render/mount'
 import { buildSegments, initialSegments } from './segments'
-import { applyPresetStyle, applyTimings, parseDirection, parsePreset, STYLES } from './styles'
-import type { EffectTiming, FlowDirection, Preset } from './types'
+import { applyPresetStyle, applyTimings, parseDirection, parsePreset, parseRoll, STYLES } from './styles'
+import type { EffectTiming, FlowDirection, Preset, RollDirection } from './types'
 
 const TAG = 'char-flow'
 
 export class CharFlowElement extends HTMLElement {
-  static observedAttributes = ['value', 'preset', 'animated', 'direction'] as const
+  static observedAttributes = ['value', 'preset', 'animated', 'direction', 'roll'] as const
 
   #sr!: HTMLElement
   #visual!: HTMLElement
@@ -98,6 +98,14 @@ export class CharFlowElement extends HTMLElement {
     this.setAttribute('direction', v)
   }
 
+  get roll(): RollDirection {
+    return parseRoll(this.getAttribute('roll'))
+  }
+
+  set roll(v: RollDirection) {
+    this.setAttribute('roll', v)
+  }
+
   set spinTiming(t: EffectTiming | undefined) {
     this.#spinTiming = t
     this.#applyOptions()
@@ -144,7 +152,7 @@ export class CharFlowElement extends HTMLElement {
       this.#keys = built.keys
     }
 
-    mountVisual(this.#visual, segments, animated, this.direction)
+    mountVisual(this.#visual, segments, animated, this.direction, this.roll)
     this.#prevValue = next
   }
 }

@@ -1,9 +1,9 @@
 import { createElement, useEffect, useRef, type HTMLAttributes } from 'react'
 import type { CharFlowElement } from './element'
-import type { EffectTiming, FlowDirection, Preset } from './types'
+import type { EffectTiming, FlowDirection, Preset, RollDirection } from './types'
 
 export type { CharFlowElement }
-export type { Preset, EffectTiming, FlowDirection } from './types'
+export type { Preset, EffectTiming, FlowDirection, RollDirection } from './types'
 
 function assertRegistered(): void {
   if (typeof customElements !== 'undefined' && !customElements.get('char-flow')) {
@@ -18,6 +18,7 @@ export interface CharFlowProps extends Omit<HTMLAttributes<CharFlowElement>, 'va
   preset?: Preset
   animated?: boolean
   direction?: FlowDirection
+  roll?: RollDirection
   spinTiming?: EffectTiming
   slideTiming?: EffectTiming
 }
@@ -27,6 +28,7 @@ export function CharFlow({
   preset = 'alnum',
   animated = true,
   direction = 'auto',
+  roll = 'auto',
   spinTiming,
   slideTiming,
   className,
@@ -51,15 +53,17 @@ export function CharFlow({
     el.preset = preset
     el.animated = animated
     el.direction = direction
+    el.roll = roll
     if (spinTiming !== undefined) el.spinTiming = spinTiming
     if (slideTiming !== undefined) el.slideTiming = slideTiming
-  }, [preset, animated, direction, spinTiming, slideTiming])
+  }, [preset, animated, direction, roll, spinTiming, slideTiming])
 
   return createElement('char-flow', {
     ref,
     value,
     preset,
     direction,
+    roll,
     ...(animated ? {} : { animated: 'false' }),
     class: className,
     style,

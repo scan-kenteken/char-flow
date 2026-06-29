@@ -1,4 +1,4 @@
-import type { EffectTiming, FlowDirection, Preset } from './types'
+import type { EffectTiming, FlowDirection, Preset, RollDirection } from './types'
 import { DEFAULT_SLIDE, DEFAULT_SPIN } from './types'
 
 export const STYLES = `
@@ -114,5 +114,10 @@ export function parsePreset(v: string | null): Preset {
 
 export function parseDirection(v: string | null): FlowDirection {
   if (v === 'forward' || v === 'backward') return v
+  return 'auto'
+}
+
+export function parseRoll(v: string | null): RollDirection {
+  if (v === 'up' || v === 'down') return v
   return 'auto'
 }

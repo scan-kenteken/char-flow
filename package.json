@@ -1,6 +1,6 @@
 {
   "name": "char-flow",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "CharFlow — lightweight animated alphanumeric text for license plates, codes, and flowing paragraphs",
   "type": "module",
   "license": "MIT",
@@ -56,6 +56,7 @@
     "demo": "npm run build && cp dist/element.js demo/element.js && npx --yes serve . -p 3000",
     "dev": "tsup --watch",
     "typecheck": "tsc --noEmit",
+    "test:roll": "npm run build && npx --yes tsx scripts/test-roll.ts",
     "capture-demo": "node scripts/capture-demo.mjs"
   },
   "peerDependencies": {
