@@ -42,6 +42,12 @@ import 'char-flow'
 | `direction` | `auto` | `auto` picks the shortest wheel path, `forward` counts up, `backward` counts down |
 | `roll` | `auto` | `auto` matches path direction, `up` / `down` force the on-screen scroll (path still follows `direction`) |
 
+Use `direction` for which wheel route to take and `roll` for how it should look. A clock ticking forward with digits rolling down:
+
+```html
+<char-flow value="12:32" direction="forward" roll="down"></char-flow>
+```
+
 Animations respect `prefers-reduced-motion`.
 
 ### Styling
@@ -79,19 +85,30 @@ import { CharFlow } from 'char-flow/react'
 export function Plate({ value }: { value: string }) {
   return <CharFlow value={value} preset="plate" className="plate" />
 }
+
+export function Clock({ value }: { value: string }) {
+  return <CharFlow value={value} preset="alnum" direction="forward" roll="down" />
+}
 ```
 
 React is an optional peer dependency (`>=18`).
 
 ## Low-level API
 
-The main entry also exports diffing and classification utilities:
+The main entry also exports diffing, classification, and stack-planning helpers:
 
 ```ts
-import { diff, classify } from 'char-flow'
+import { diff, classify, planFor, applyRoll } from 'char-flow'
 
 diff('ABC-100', 'ABC-9')
 classify('G')
+
+// inspect or customise a digit roll before rendering
+const plan = planFor(
+  { key: 'm', char: '3', anim: 'wheel-digit', fromChar: '2' },
+  'forward',
+  'down',
+)
 ```
 
 ## Demo
